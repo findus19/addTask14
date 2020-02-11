@@ -29,68 +29,71 @@ class DomElement {
         };
     };
 };
+
 const domElement = new DomElement('100px', '100px', '#05dae6', '24px');
-domElement.makeNewElem();
+document.addEventListener('DOMContentLoaded', function(){
+    domElement.makeNewElem();
 
-const squer = document.querySelector('.block');
-let widthCl = document.documentElement.clientWidth;
-let heightCl = document.documentElement.clientHeight;
-squer.style.position = 'absolute';
+    const squer = document.querySelector('.block');
+    let widthCl = document.documentElement.clientWidth;
+    let heightCl = document.documentElement.clientHeight;
+    squer.style.position = 'absolute';
 
-squer.style.left = "45%";
-squer.style.top = "45%";
+    squer.style.left = "45%";
+    squer.style.top = "45%";
 
-document.addEventListener('keydown', startRun);
-document.addEventListener('keyup', stopRun);
+    document.addEventListener('keydown', startRun);
+    document.addEventListener('keyup', stopRun);
 
-const keys = {
-    ArrowUp: false,
-    ArrowDown: false,
-    ArrowRight: false,
-    ArrowLeft: false
-};
+    const keys = {
+        ArrowUp: false,
+        ArrowDown: false,
+        ArrowRight: false,
+        ArrowLeft: false
+    };
 
-let settingX = squer.offsetLeft;
-let settingY = squer.offsetTop;
-let settingSpeed = 50;
-requestAnimationFrame(playGame);
-
-function playGame() {
-    if(keys.ArrowLeft && settingX > 0){
-        settingX -= settingSpeed;
-    }
-
-    if(keys.ArrowRight && settingX < widthCl){
-        settingX += settingSpeed;
-    }
-
-    if(keys.ArrowUp && settingY > 0){
-        settingY -= settingSpeed;
-    }
-
-    if(keys.ArrowDown && settingY < heightCl){
-        settingY += settingSpeed;
-    }
-
-    
-    squer.style.left = settingX + 'px';
-    squer.style.top = settingY + 'px';
+    let settingX = squer.offsetLeft;
+    let settingY = squer.offsetTop;
+    let settingSpeed = 50;
     requestAnimationFrame(playGame);
-/*     console.log(keys.ArrowDown);
-console.log(settingX);
-console.log(settingY); */
-}
-console.log(heightCl);
-function startRun(event){
-    event.preventDefault();
-    if(keys.hasOwnProperty(event.key)){
-    keys[event.key] = true;
-    }
-}
 
-function stopRun(event){
-    event.preventDefault();
-    if(keys.hasOwnProperty(event.key)){
-        keys[event.key] = false;
+    function playGame() {
+        if(keys.ArrowLeft && settingX > 0){
+            settingX -= settingSpeed;
+        }
+
+        if(keys.ArrowRight && settingX < widthCl){
+            settingX += settingSpeed;
+        }
+
+        if(keys.ArrowUp && settingY > 0){
+            settingY -= settingSpeed;
+        }
+
+        if(keys.ArrowDown && settingY < heightCl){
+            settingY += settingSpeed;
+        }
+
+        
+        squer.style.left = settingX + 'px';
+        squer.style.top = settingY + 'px';
+        requestAnimationFrame(playGame);
+    /*     console.log(keys.ArrowDown);
+    console.log(settingX);
+    console.log(settingY); */
     }
-}
+    console.log(heightCl);
+    function startRun(event){
+        event.preventDefault();
+        if(keys.hasOwnProperty(event.key)){
+        keys[event.key] = true;
+        }
+    }
+
+    function stopRun(event){
+        event.preventDefault();
+        if(keys.hasOwnProperty(event.key)){
+            keys[event.key] = false;
+        }
+    }
+})
